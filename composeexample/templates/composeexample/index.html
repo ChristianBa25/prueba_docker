@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Productos</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .formulario{
+            text-align: center;
+            border: 3px solid #4ae;
+            display: inline-block;
+            padding: 30px;
+        }
+      
+        input{
+            margin: 5px;
+        }
+
+       
+
+        a{
+            margin-bottom: 5px;
+            color: #4ae;
+            cursor: pointer;
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Añade Tus productos a continuación</h1>
+        <div class="formulario">
+
+            <form action="/productos/" method= "GET">
+                <input type="text" name="nombre" placeholder="Nombre Producto"><br><br>
+                <input type="text" name="descripcion" placeholder="Descripción Producto">
+                <p>Cantidad producto</p>
+                <input type="number" name="cantidad" placeholder="Pon un número">
+                <br><br>
+
+                <select name="activo">
+                    <option selected value=1>Activo</option>
+                    <option selected value=2>En Pausa</option>                
+                </select>
+
+                <br><br>
+
+
+                <div id="nueva_categoria" class="nueva_categoria"> 
+                </div>
+                
+                <div class="contenido">
+
+                </div>
+                <a id="boton_categoria">+ Añadir Categoría</a>
+
+
+
+                <input type="submit" value="Añadir Producto">
+                
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        const botonCategoria = document.querySelector("#boton_categoria");
+        const nuevaCategoria = document.querySelector("#nueva_categoria");
+        const contenido = document.querySelector("#contenido");
+        const fragmento = document.createDocumentFragment();
+        
+        numeroInputs = 0;
+        function nombreCategoría (){
+            numeroInputs += 1; 
+            return ("key"+numeroInputs);
+        }
+
+        function nombreDescripcion (){
+            return ("value"+numeroInputs);
+        }
+        
+
+        botonCategoria.addEventListener("click", function(){
+            const key = document.createElement("INPUT");
+            key.type = "text";
+            key.placeholder= "Categoria";
+            key.name = nombreCategoría()
+
+            const value = document.createElement("INPUT");
+            value.type = "text";
+            value.placeholder= "Descripción";
+            value.name = nombreDescripcion()
+            
+            const espacio = document.createElement("BR")
+            fragmento.appendChild(key);
+            fragmento.appendChild(value);
+            fragmento.appendChild(espacio);
+            nuevaCategoria.appendChild(fragmento)
+        })
+        
+    </script>
+</body>
+</html>

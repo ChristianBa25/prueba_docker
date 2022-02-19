@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from gestionProductos.models import Articulos
 
 # Create your views here.
 def inicio(request):
@@ -8,6 +8,9 @@ def inicio(request):
     return render(request, "composeexample/index.html", {})
 
 def agregarABaseDatos(documento):
+    # articulos = Articulos.producto
+    # articulo_id = articulos.insert_one(documento).inserted_id
+    # articulo_id
     pass
 
 def productos(request):

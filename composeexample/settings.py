@@ -85,7 +85,15 @@ DATABASES = {
         'PASSWORD':  os.getenv('POSTGRES_PASSWORD'),
         'PORT': 5432,
      }
+
 }
+
+#Mongo username
+from pymongo import MongoClient
+client = MongoClient('mongo',
+                     username='mongo',
+                     password='mongo',
+                     authMechanism='SCRAM-SHA-256')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -1,5 +1,4 @@
 version: "3.9"
-   
 services:
   mongo:
     image: mongo
@@ -9,15 +8,17 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mongo
     ports:
       - "27017:27017"
+    networks:
+      - prueba-network
 
   db:
     image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    networks:
+      - prueba-network
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -31,3 +32,9 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+    networks:
+      - prueba-network
+
+networks:
+  prueba-network:
+    name: prueba-network

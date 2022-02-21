@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        .contenedor{
+            margin-top: 10px;
+        }
+        section p, section input,section select{
+            display: inline;
+            margin-top:10px;
+        }
+
+        .submit{
+            margin-top: 10px;
+        }
+     
+        
+        .documento{
+            border: solid 3px blue;
+            margin: 20px;
+            padding: 5px;
+            width: 500px;
+            display: inline-block;
+            
+        }
+        .categoria{
+            border: solid 1px black;
+            text-align: left;
+        }
+
+        .tema{
+            display: inline;
+        }
+        
+        #datos_a_borrar{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    {% include "composeexample/barra.html" %}
+
+    <div class="contenedor" >
+        <form action="#" method="GET">
+            <section>
+                <p>Id a borrar</p>
+                <input name="dato_a_borrar" type="text" class="categoria">
+            </section>
+
+            <input id="borrar"  class="submit" type="submit" value="Borrar">
+            
+    <script>
+        borrar=document.querySelector("#borrar")
+
+        borrar.addEventListener("click",function(){
+            alert("Documento Borrado")
+        })
+    </script>
+</body>
+</html>

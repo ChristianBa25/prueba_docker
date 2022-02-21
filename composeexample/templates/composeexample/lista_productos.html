@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de productos</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        .contenedor{
+            width: 90%;
+            display: inline-block;
+            
+        }
+
+        .documento{
+            border: solid 3px blue;
+            margin: 20px;
+            padding: 5px;
+            width: 500px;
+            display: inline-block;
+            
+        }
+        .categoria{
+            border: solid 1px black;
+            text-align: left;
+        }
+
+        .tema{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    {% include "composeexample/barra.html" %}
+
+    <div class="contenedor">
+    {% for documento in coleccion %}
+    
+        <div class="documento" >
+            {% for categoria, valor in documento.items %}
+                <section class = "categoria">
+                    <h4 class="tema">{{categoria}}</h4>
+                    {{valor}}  
+                </section>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+
+</body>
+</html>

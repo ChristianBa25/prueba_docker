@@ -1,11 +1,27 @@
 <html>
+<head>
+    <style>
+        .btn-menu{
+            margin-top: 30px;
+            padding:3px;
+            font-size: 20px;
+            display: inline-block;
+            border: solid 2px;
+            text-decoration: none;
+        }
+
+        .btn-menu:hover{
+            color: blue;
+        }
+    </style>
+</head>
 <body>
-    <ul>
-        <li>Home</li>
-        <li>Servicios</li>
-        <li>Como te va</li>
-        <li>Lammame</li>
-        <li>Te llamo</li>
-    </ul>
+
+    <div class="contenedor">
+            <a class ="btn-menu" href="/home/">Añadir Productos</a>
+            <a class ="btn-menu" href="/productos/">Ver todos los productos</a>
+            <a class ="btn-menu" href="/buscar/">Buscar Producto</a>
+            <a class ="btn-menu" href="/borrar/">Eliminar Producto</a>  
+    </div>
 </body>
 </html>

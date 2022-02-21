@@ -89,11 +89,9 @@ DATABASES = {
 }
 
 #Mongo username
-from pymongo import MongoClient
-client = MongoClient('mongo',
-                     username='mongo',
-                     password='mongo',
-                     authMechanism='SCRAM-SHA-256')
+MONGO_HOST = 'mongo'
+MONGO_USERNAME = 'mongo'
+MONGO_PASSWORD = 'mongo'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

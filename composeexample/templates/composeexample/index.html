@@ -32,11 +32,13 @@
 
 </head>
 <body>
+    <p id="producto_anadido" style="display:none">{{producto_anadido}}</p>
+
     <div class="contenedor">
         <h1>Añade Tus productos a continuación</h1>
         <div class="formulario">
 
-            <form action="/productos/" method= "GET">
+            <form action="#" method= "GET">
                 <input type="text" name="nombre" placeholder="Nombre Producto"><br><br>
                 <input type="text" name="descripcion" placeholder="Descripción Producto">
                 <p>Cantidad producto</p>
@@ -61,19 +63,25 @@
 
 
 
-                <input type="submit" value="Añadir Producto">
+                <input id="enviar" type="submit" value="Añadir Producto">
                 
             </form>
         </div>
     </div>
+    {% include "composeexample/barra.html" %}
 
     <script>
-
         const botonCategoria = document.querySelector("#boton_categoria");
         const nuevaCategoria = document.querySelector("#nueva_categoria");
         const contenido = document.querySelector("#contenido");
         const fragmento = document.createDocumentFragment();
-        
+        const enviar = document.querySelector("#enviar")
+        const producto_anadido = document.querySelector("#producto_anadido")
+
+        if(producto_anadido.textContent == "True"){
+            alert("Se añadió el producto correctamente")
+        }
+
         numeroInputs = 0;
         function nombreCategoría (){
             numeroInputs += 1; 

@@ -11,7 +11,11 @@ def inicio(request):
         documento = {}
         nombreProducto = request.GET["nombre"]
         descripionProducto = request.GET["descripcion"]
-        cantidadProducto = int(request.GET["cantidad"])
+        try:
+            cantidadProducto = int(request.GET["cantidad"])
+        except:
+            cantidadProducto = (request.GET["cantidad"])
+
         estadoProducto = request.GET["activo"]
 
         #Añadir datos en diccionario

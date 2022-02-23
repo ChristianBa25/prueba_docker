@@ -44,6 +44,21 @@
         #datos_a_borrar{
             display: none;
         }
+
+        .bloqueado{
+            display: inline-block;
+            width: max-content;
+            color: lightgrey;
+        }
+
+        .bloqueado input{
+            border-color: lightgrey;
+        }
+
+        .bloqueado input:hover{
+            cursor: pointer;
+        }
+
     </style>
     </style>
 
@@ -53,21 +68,22 @@
 
     <div class="contenedor" >
         <form action="#" method="GET">
-            <section>
+            <section id="section_categoria" class="bloqueado">
                 <p>Categoria</p>
-                <input name="categoria_buscar" type="text" class="categoria">
+                <input id="categoria" name="categoria_buscar" type="text" class="categoria" value="Bloqueado">
             </section>
 
             <section>
-                <p>Condicional</p>
-                <select name="condicional_buscar">
+                <p>Tipo de busqueda</p>
+                <select id="select" name="condicional_buscar">
                     <option selected value=1>Igual que</option>
                     <option selected value=2>Mayor Que</option>
                     <option selected value=3>Mayor o Igual Que</option>  
                     <option selected value=4>Menor o Igual Que</option>  
                     <option selected value=5>Diferente Que</option>
-                    <option selected value=6>Busqueda de Nombre</option>
+                    <option selected value=6>Busqueda en categoria</option>
                     <option selected value=7>Busqueda de IP</option>                   
+                    <option selected value=8>Buscar en todas las categorías</option> 
                 </select>
             </section>
 
@@ -92,5 +108,28 @@
         
         </form>
     </div>
+
+    <script>
+        section_categoria = document.querySelector("#section_categoria")
+        select = document.querySelector("#select");
+        input_categoria = document.querySelector("#categoria");
+        input_categoria.disabled=true;
+        select.addEventListener("change", (e)=>{
+            if (select.value == 7 || select.value == 8){
+                input_categoria.disabled=true;
+                input_categoria.value="Bloqueado"
+                section_categoria.classList.add("bloqueado")
+            }
+            else{
+                input_categoria.disabled=false;
+                if (input_categoria.value=="Bloqueado"){
+                    input_categoria.value=""
+                }
+                section_categoria.classList.remove("bloqueado")
+            }
+        })
+        
+
+    </script>
 </body>
 </html>

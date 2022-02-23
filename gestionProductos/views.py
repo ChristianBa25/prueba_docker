@@ -62,8 +62,7 @@ def inicio(request):
         producto_anadido = True
     except:
         producto_anadido = False
-
-
+    
     return render(request, "composeexample/index.html", {"producto_anadido": producto_anadido})
 
 def agregarABaseDatos(documento):
@@ -72,7 +71,7 @@ def agregarABaseDatos(documento):
 
     
 
-def productos(request):
+def productos(request, llamada=False):
     busqueda = MongoConnection()
     a = busqueda.find_all_documents()
     response=[]
@@ -80,6 +79,9 @@ def productos(request):
     for i in a:
         coleccion.append(i)
         response.append(i["_id"])
+    
+    if llamada:
+        return coleccion
     return render(request, "composeexample/lista_productos.html", {"busqueda":response,"coleccion":coleccion})
 
 
@@ -87,6 +89,9 @@ def buscar(request):
     comando = {}
     try:
         categoria = request.GET["categoria_buscar"]
+    except:
+        pass
+    try:
         condicional = request.GET["condicional_buscar"]
         descripcion = request.GET["descripcion_buscar"]
     
@@ -109,35 +114,48 @@ def buscar(request):
             comando[categoria] = descripcion
         elif condicional == "7":
             comando['_id'] = ObjectId(descripcion)
-        
+        elif condicional == "8":
+            documentos= productos(request, True)
+            response= []
+
+            for documento in documentos:
+                for key,value in documento.items():
+                    if value == descripcion:
+                        response.append(documento)
             
-        busqueda = MongoConnection()
-        a = busqueda.find_specific_documents(comando)
+
+        if condicional != "8":    
+            busqueda = MongoConnection()
+            a = busqueda.find_specific_documents(comando)
 
 
-        response=[]
-        id_mostrados=[]
-        for i in a:
-             
-            id_mostrados.append(i['_id'])
-            response.append(i)
-        #id_mostrados = id_mostrados[0]
+            response=[]
+            id_mostrados=[]
+            for i in a:
+                
+                id_mostrados.append(i['_id'])
+                response.append(i)
+            #id_mostrados = id_mostrados[0]
+        
     except:
         id_mostrados={}
         response="No se ha encontrado nada, realiza una busqueda"
-    return render(request, "composeexample/buscar.html", {"resultado": response, "mostrados":id_mostrados})
+    return render(request, "composeexample/buscar.html", {"resultado": response})
 
 def borrar(request):
     comando = {}
     try:
-        id_mostrados = request.GET["datos_a_borrar"]
+        id_mostrados = request.GET["dato_a_borrar"]
         comando['_id'] = ObjectId(id_mostrados)
 
+        
+
     except:
-        pass
+        comando["delete"] = "Not found"
 
     borrar = MongoConnection()
     borrar.delete_documents(comando)
+    
 
     
     return render(request, "composeexample/delete.html", {})
